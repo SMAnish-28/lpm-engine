@@ -61,27 +61,27 @@ deterministically every cycle, is the core difficulty this design solves.
                                   │
                                   ▼
                         ┌─────────────────────┐
-                        │    Table storage     │   N x {valid, prefix,
-                        │                       │        prefix_len, next_hop}
-                        └──────────┬────────────┘
+                        │    Table storage    │   N x {valid, prefix,
+                        │                     │        prefix_len, next_hop}
+                        └──────────┬──────────┘
                                    │  (broadcast lookup_ip to all entries)
               ┌────────────────────┼────────────────────┐
-              ▼                    ▼                     ▼
+              ▼                    ▼                    ▼
         ┌───────────┐        ┌───────────┐         ┌─────────────┐
-        │  Entry 0   │        │  Entry 1   │  ...    │ Entry N-1    │
-        │ masked cmp │        │ masked cmp │         │ masked cmp   │
-        └─────┬───────┘        └─────┬──────┘         └──────┬───────┘
-              │ match[0]             │ match[1]               │ match[N-1]
-              └─────────────────────┬┴────────────────────────┘
-                                     ▼
+        │  Entry 0  │        │  Entry 1  │  ...    │ Entry N-1   │
+        │ masked cmp│        │ masked cmp│         │ masked cmp  │
+        └─────┬─────┘        └─────┬─────┘         └──────┬──────┘
+              │ match[0]           │ match[1]             │ match[N-1]
+              └────────────────────┴──────────────────────┘
+                                   ▼
                           ┌──────────────────────┐
-                          │   Priority select      │  longest prefix_len
-                          │                         │  wins; tie = lowest idx
-                          └───────────┬─────────────┘
+                          │   Priority select    │  longest prefix_len
+                          │                      │  wins; tie = lowest idx
+                          └───────────┬──────────┘
                                       ▼
                           ┌──────────────────────┐
-                          │   Output register      │  1-cycle lookup latency
-                          └───────────┬─────────────┘
+                          │   Output register    │  1-cycle lookup latency
+                          └───────────┬──────────┘
                                       ▼
                 result_val / result_hit / result_next_hop / result_prefix_len
 ```
