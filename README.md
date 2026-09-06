@@ -66,9 +66,9 @@ click-through detail.)*
                                   │
                                   ▼
                         ┌───────────────────┐
-                        │   Table storage    │   N x {valid, prefix,
-                        │                     │        prefix_len, next_hop}
-                        └─────────┬───────────┘
+                        │   Table storage   │   N x {valid, prefix,
+                        │                   │        prefix_len, next_hop}
+                        └─────────┬─────────┘
                                   │  (broadcast lookup_ip to all entries)
               ┌───────────────────┼───────────────────┐
               ▼                   ▼                   ▼
@@ -76,9 +76,9 @@ click-through detail.)*
         │  Entry 0  │       │  Entry 1  │  ...  │ Entry N-1   │
         │masked cmp │       │masked cmp │       │ masked cmp  │
         └─────┬─────┘       └─────┬─────┘       └──────┬──────┘
-              │  match[0]          │  match[1]            │ match[N-1]
-              └────────────────────┼──────────────────────┘
-                                    ▼
+              │  match[0]         │  match[1]          │ match[N-1]
+              └───────────────────┼────────────────────┘
+                                  ▼
                           ┌───────────────────┐
                           │  Priority select  │  longest prefix_len
                           │                   │  wins; tie = lowest idx
